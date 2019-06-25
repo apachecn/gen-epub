@@ -15,9 +15,9 @@ function fnameEscape(name){
     return name.replace(/\\|\/|:|\*|\?|"|<|>|\|/g, '-')
 }
 
-function writeEpub(articles, imgs) {
+function writeEpub(articles, imgs, bookName) {
     
-    var bookName = fnameEscape(articles[0].title)
+    bookName = fnameEscape(bookName || articles[0].title)
     
     var zip = new jszip();
     zip.file('mimetype', fs.readFileSync(d('./assets/mimetype')));
