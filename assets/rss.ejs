@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><%= name %></title>
+  <link rel="alternate" type="text/html" href="<%= url %>"/>
+  <link rel="self" type="application/atom+xml" href="<%= self %>/<%= name %>.xml"/>
+  <updated><%= updated %></updated>
+  <id><%= url %></id>
+  
+  <author>
+    <name><%= name %></name>
+    <uri><%= url %></uri>
+  </author>
+  
+  <generator uri="http://github.com/258ch/rss-ci">RSS-CI</generator>
+  
+  <% for(var article of articles) { %>
+  <entry>
+    <title><%= article.title %></title>
+    <link href="<%= article.url %>"/>
+    <id><%= article.url %></id>
+    <summary><%= article.summary %></summary>
+    
+    <content type="html"><![CDATA[<%- article.content %>]]></content>
+    
+  </entry>
+  <% } %>
+</feed>
