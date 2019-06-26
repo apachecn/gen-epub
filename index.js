@@ -15,9 +15,11 @@ function fnameEscape(name){
     return name.replace(/\\|\/|:|\*|\?|"|<|>|\|/g, '-')
 }
 
-function writeEpub(articles, imgs, bookName) {
+function writeEpub(articles, imgs, name, path) {
     
-    bookName = fnameEscape(bookName || articles[0].title)
+    name = name || articles[0].title
+    path = path || fnameEscape(name) + '.epub'
+    if(!path.endsWith('.epub')) path += '.epub'
     
     var zip = new jszip();
     zip.file('mimetype', fs.readFileSync(d('./assets/mimetype')));
@@ -53,7 +55,7 @@ function writeEpub(articles, imgs, bookName) {
         imgToc: imgToc,
         htmlToc: htmlToc,
         uuid: uuid,
-        name: bookName,
+        name: name,
     });
     zip.file('OEBPS/content.opf', opf);
 
@@ -63,7 +65,8 @@ function writeEpub(articles, imgs, bookName) {
     });
     zip.file('OEBPS/toc.ncx', ncx);
     
-    zip.generateAsync({type: 'nodebuffer', 'compression':'DEFLATE'}).then(co => fs.writeFileSync(`${bookName}.epub`, co))
+    zip.generateAsync({type: 'nodebuffer', 'compression':'DEFLATE'})
+       .then(co => fs.writeFileSync(path, co))
 }
 
 module.exports = writeEpub
