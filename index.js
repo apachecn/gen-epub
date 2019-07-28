@@ -40,11 +40,11 @@ function writeEpub(articles, imgs, name, path) {
         })
     }
     
-    for(var [name, data] of imgs.entries()) {
-        zip.file(`OEBPS/Images/${name}`, data);
+    for(var [fname, data] of imgs.entries()) {
+        zip.file(`OEBPS/Images/${fname}`, data);
         
         imgToc.push({
-            file: name,
+            file: fname,
         })
     }
     
