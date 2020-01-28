@@ -1,6 +1,6 @@
 {
   "name": "gen-epub",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "ejs": "*",
-    "moment": "*",
-    "jszip": ">=3.0.0"
+    "moment": "*"
   }
 }

@@ -2,7 +2,7 @@ var fs = require('fs')
 var ejs = require('ejs')
 var moment = require('moment')
 var uuidGenerator = require('./uuid.js')
-var jszip = require('./jszip-sync.js')
+var jszip = require('./jszip-sync.js').JSZip
 var path = require('path')
 
 function d(fname) {
