@@ -2,7 +2,7 @@ var fs = require('fs')
 var ejs = require('ejs')
 var moment = require('moment')
 var uuidGenerator = require('./uuid.js')
-var jszip = require('jszip')
+var jszip = require('./jszip-sync.js')
 var path = require('path')
 
 function d(fname) {
@@ -65,8 +65,8 @@ function writeEpub(articles, imgs, name, path) {
     });
     zip.file('OEBPS/toc.ncx', ncx);
     
-    zip.generateAsync({type: 'nodebuffer', 'compression':'DEFLATE'})
-       .then(co => fs.writeFileSync(path, co))
+    var data = zip.generate({type: 'nodebuffer', 'compression':'DEFLATE'})
+    fs.writeFileSync(path, data)
 }
 
 module.exports = writeEpub
