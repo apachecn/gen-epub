@@ -66,7 +66,7 @@ function writeEpub(articles, imgs, name, path) {
     zip.file('OEBPS/toc.ncx', ncx);
     
     var data = zip.generate({base64: false, 'compression':'DEFLATE'})
-    fs.writeFileSync(path, data)
+    fs.writeFileSync(path, data, 'binary')
 }
 
 module.exports = writeEpub
