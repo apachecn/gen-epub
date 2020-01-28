@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "ejs": "*",
-    "moment": "*"
+    "moment": "*",
+    "jszip": "2.x.x"
   }
 }
