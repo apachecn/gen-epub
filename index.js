@@ -28,28 +28,23 @@ function writeEpub(articles, imgs, name, path) {
     
     var articleTemp = ejs.compile(fs.readFileSync(d('assets/article.ejs'), 'utf-8'))
     
-    var htmlToc = []
-    var imgToc = []
-    
-    for(var [i, art] of Object.entries(articles)) {
+    for(var [i, art] of articles.entries()) {
         zip.file(`OEBPS/Text/${+i+1}.html`, articleTemp(art));
-        
-        htmlToc.push({
-            title: art.title,
-            file: `${+i+1}.html`,
-        })
     }
     
     for(var [fname, data] of imgs.entries()) {
         zip.file(`OEBPS/Images/${fname}`, data);
-        
-        imgToc.push({
-            file: fname,
-        })
     }
     
     var uuid = uuidGenerator.uuid();
-    
+        
+    var htmlToc = articles.map((art, i) => ({
+            title: art.title,
+            file: `${+i+1}.html`,
+    }))
+    var imgToc = Array.from(imgs.keys())
+        .map(fname => {file: fname})
+
     var opf = ejs.render(fs.readFileSync(d('assets/content.ejs'), 'utf-8'), {
         date: moment().format('YYYY-MM-DD'),
         imgToc: imgToc,
