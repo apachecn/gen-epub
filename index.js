@@ -43,7 +43,7 @@ function writeEpub(articles, imgs, name, path) {
             file: `${+i+1}.html`,
     }))
     var imgToc = Array.from(imgs.keys())
-        .map(fname => {file: fname})
+        .map(fname => ({file: fname}))
 
     var opf = ejs.render(fs.readFileSync(d('assets/content.ejs'), 'utf-8'), {
         date: moment().format('YYYY-MM-DD'),
