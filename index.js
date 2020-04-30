@@ -1,7 +1,7 @@
 var fs = require('fs')
 var ejs = require('ejs')
 var moment = require('moment')
-var genUuid = require('uuid')
+var uuid = require('uuid')
 var jszip = require('jszip')
 var path = require('path')
 
@@ -42,7 +42,7 @@ function writeEpub(articles, imgs, name, path) {
         zip.file(`OEBPS/Images/${fname}`, data);
     }
     
-    var uuid = genUuid();
+    var uuid_ = uuid.v4();
     var htmlToc = articles.map((art, i) => ({
             title: art.title,
             file: `${+i+1}.html`,
@@ -54,7 +54,7 @@ function writeEpub(articles, imgs, name, path) {
         date: moment().format('YYYY-MM-DD'),
         imgToc: imgToc,
         htmlToc: htmlToc,
-        uuid: uuid,
+        uuid: uuid_,
         name: name,
     });
     zip.file('OEBPS/content.opf', co);
