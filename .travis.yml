@@ -1,12 +1,6 @@
-language: python
-python: 3.6
+language: node_js
+node: 12
 
-install:
-    - 'pip install -r requirements.txt'
-
-script:
-    - python -m BookerTrans -v
-    
 deploy:
     -   provider: npm
         email: apachecn@163.com
