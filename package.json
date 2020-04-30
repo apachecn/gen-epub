@@ -1,13 +1,17 @@
 {
   "name": "gen-epub",
-  "version": "0.1.5",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A small tool to generate EPUB.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "wizardforcel",
-  "license": "MIT",
+  "author": "ApacheCN",
+  "license": "SATA",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apachecn/gen-epub.git"
+  },
   "dependencies": {
     "ejs": "*",
     "moment": "*",
