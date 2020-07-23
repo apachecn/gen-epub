@@ -15,6 +15,11 @@ function fnameEscape(name){
     return name.replace(/\\|\/|:|\*|\?|"|<|>|\|/g, '-')
 }
 
+function calcDigitCount(l) {
+    
+    return (l == 0)? 1: Math.floor(Math.log10(l)) + 1
+}
+
 function writeEpub(articles, imgs, name, path) {
     
     name = name || articles[0].title
@@ -33,9 +38,11 @@ function writeEpub(articles, imgs, name, path) {
     zip.file('META-INF/container.xml', container);
     zip.file('OEBPS/Styles/Style.css', style);
     
+    var l = calcDigitCount(articles.length)
     articleTemp = ejs.compile(articleTemp)
     for(var [i, art] of articles.entries()) {
-        zip.file(`OEBPS/Text/${+i+1}.html`, articleTemp(art));
+        var padNum = i.toString().padStart(l, '0')
+        zip.file(`OEBPS/Text/${padNum}.html`, articleTemp(art));
     }
     
     for(var [fname, data] of imgs.entries()) {
@@ -45,7 +52,7 @@ function writeEpub(articles, imgs, name, path) {
     var uuid_ = uuid.v4();
     var htmlToc = articles.map((art, i) => ({
             title: art.title,
-            file: `${+i+1}.html`,
+            file: i.toString().padStart(l, '0') + '.html',
     }))
     var imgToc = Array.from(imgs.keys())
         .map(fname => ({file: fname}))
