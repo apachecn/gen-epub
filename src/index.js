@@ -112,7 +112,7 @@ function main() {
         var files = fs.readdirSync(args.imgs)
             .filter(isImg)
         for(var f of files) {
-            fullf = path.join(args.imgs, f)
+            var fullf = path.join(args.imgs, f)
             var img = fs.readFileSync(fullf)
             imgs.set(f, img)
         }
