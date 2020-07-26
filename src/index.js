@@ -91,7 +91,7 @@ function main() {
         .version(pkg.version)
         .arguments('<articleFile>', 'JSON file of article')
         .option('-i, --imgs <imgDir>', 'image dir')
-        .option('-n, --name <name>', 'name of epub, default as the title of the first article')
+        .option('-n, --book-name <name>', 'name of epub, default as the title of the first article')
         .option('-p, --path <path>', 'path of epub, default as the current dir')
         .parse()
         
@@ -118,7 +118,7 @@ function main() {
         }
     }
     
-    writeEpub(articles, imgs, args.name, args.path)
+    writeEpub(articles, imgs, args.bookName, args.path)
 }
 
 if(require.main === module) main()
