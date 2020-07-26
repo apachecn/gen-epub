@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/apachecn/gen-epub.git"
   },
+  "bin": {
+    "gen-epub": "./src/index.js"
+  },
   "dependencies": {
     "ejs": "*",
     "moment": "*",
