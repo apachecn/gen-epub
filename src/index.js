@@ -1,9 +1,15 @@
+#!/usr/bin/env node
+
 var fs = require('fs')
 var ejs = require('ejs')
 var moment = require('moment')
 var uuid = require('uuid')
 var jszip = require('jszip')
 var path = require('path')
+var {Command} = require('commander')
+var pkg = require('../package.json');
+
+var isImg = s => /\.(jpg|jpeg|gif|png|bmp|webp|tiff)$/.test(s)
 
 function d(fname) {
     
@@ -79,3 +85,40 @@ function writeEpub(articles, imgs, name, path) {
 }
 
 module.exports = writeEpub
+
+function main() {
+    var args = new Command()
+        .version(pkg.version)
+        .arguments('<articleFile>', 'JSON file of article')
+        .option('-i, --imgs <imgDir>', 'image dir')
+        .option('-n, --name <name>', 'name of epub, default as the title of the first article')
+        .option('-p, --path <path>', 'path of epub, default as the current dir')
+        .parse()
+        
+    var articleFile = args.args[0]
+    if(!fs.existsSync(articleFile) || 
+       !articleFile.endsWith('.json')) {
+           console.log('JSON file not found')
+           return
+    }
+    var articles = JSON.parse(fs.readFileSync(articleFile, 'utf-8'))
+    
+    var imgs = new Map()
+    if(args.imgs) {
+        if(!fs.statSync(args.imgs).isDirectory()) {
+            console.log('img dir not found')
+            return
+        }
+        var files = fs.readdirSync(args.imgs)
+            .filter(isImg)
+        for(var f of files) {
+            fullf = path.join(args.imgs, f)
+            var img = fs.readFileSync(fullf)
+            imgs.set(f, img)
+        }
+    }
+    
+    writeEpub(articles, imgs, args.name, args.path)
+}
+
+if(require.main === module) main()
