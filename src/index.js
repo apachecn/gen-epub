@@ -80,8 +80,8 @@ function writeEpub(articles, imgs, name, path) {
     
     if(!zip.generate)
         throw ReferenceError('please install the sync version of jszip')
-    var data = zip.generate({base64: false, compression:'DEFLATE'})
-    fs.writeFileSync(path, data, 'binary')
+    var data = zip.generate({type: "nodebuffer", compression:'DEFLATE'})
+    fs.writeFileSync(path, data)
 }
 
 module.exports = writeEpub
