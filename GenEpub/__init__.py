@@ -10,6 +10,7 @@ import re
 from os import path
 import jinja2
 from datetime import datetime
+from io import BytesIO
 
 __author__ = "ApacheCN"
 __email__ = "apachecn@163.com"
@@ -37,7 +38,8 @@ def gen_epub(articles, imgs=None, name=None, path=None):
     contentTemp = open(d('./assets/content.j2'), encoding='utf-8').read()
     tocTemp = open(d('./assets/toc.j2'), encoding='utf-8').read()
     
-    zip = zipfile.ZipFile(path, 'w')
+    bio = BytesIO()
+    zip = zipfile.ZipFile(bio, 'w')
     zip.writestr('mimetype', mimetype)
     zip.writestr('META-INF/container.xml', container)
     zip.writestr('OEBPS/Styles/Style.css', style)
@@ -80,6 +82,8 @@ def gen_epub(articles, imgs=None, name=None, path=None):
     zip.writestr('OEBPS/toc.ncx', toc.encode('utf-8'))
     
     zip.close()
+    data = bio.getvalue()
+    open(path, 'wb').write(data)
     
     
     
