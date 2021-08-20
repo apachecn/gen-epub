@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
+ "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta content="urn:uuid:{{ uuid }}" name="dtb:uid"/>
+    <meta content="1" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>Unknown</text>
+  </docTitle>
+  <navMap>
+	{% for t in toc %}
+    <navPoint id="navPoint-{{ loop.index }}" playOrder="{{ loop.index }}">
+      <navLabel>
+        <text>{{ t.title }}</text>
+      </navLabel>
+      <content src="Text/{{ t.file }}"/>
+    </navPoint>
+    {% endfor %}
+  </navMap>
+</ncx>
