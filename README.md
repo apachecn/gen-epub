@@ -7,13 +7,13 @@
 通过 pypi（推荐）：
 
 ```
-pypi install GenEpub
+pip install GenEpub
 ```
 
 从源码安装：
 
 ```
-pypi install git+https://github.com/apachecn/gen-epub
+pip install git+https://github.com/apachecn/gen-epub
 ```
 
 ## 导入
