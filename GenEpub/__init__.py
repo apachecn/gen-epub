@@ -15,7 +15,7 @@ from io import BytesIO
 __author__ = "ApacheCN"
 __email__ = "apachecn@163.com"
 __license__ = "SATA"
-__version__ = "2021.8.20.0"
+__version__ = "2021.8.20.1"
 
 is_img = lambda s: re.search(r'\.(jpg|jpeg|gif|png|bmp|webp|tiff)$', s)
 
@@ -39,7 +39,7 @@ def gen_epub(articles, imgs=None, name=None, path=None):
     tocTemp = open(d('./assets/toc.j2'), encoding='utf-8').read()
     
     bio = BytesIO()
-    zip = zipfile.ZipFile(bio, 'w')
+    zip = zipfile.ZipFile(bio, 'w', zipfile.ZIP_DEFLATED)
     zip.writestr('mimetype', mimetype)
     zip.writestr('META-INF/container.xml', container)
     zip.writestr('OEBPS/Styles/Style.css', style)
