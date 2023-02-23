@@ -289,3 +289,10 @@ img {
 .image-package {
   text-align: center
 }
+
+/* INPUT
+=============================================================================*/
+
+input, button {
+  display: none;
+}
