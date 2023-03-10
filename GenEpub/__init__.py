@@ -15,7 +15,7 @@ from io import BytesIO
 __author__ = "ApacheCN"
 __email__ = "apachecn@163.com"
 __license__ = "SATA"
-__version__ = "2023.2.23.2"
+__version__ = "2023.2.23.3"
 
 is_img = lambda s: re.search(r'\.(jpg|jpeg|gif|png|bmp|webp|tiff)$', s)
 
